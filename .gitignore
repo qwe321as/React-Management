@@ -1,5 +1,11 @@
+#여긴 저장되지않는 파일 나는 로컬이라 저장함
+
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+#database
+# /database.json
+#upload
+/upload
 # dependencies
 /node_modules
 /.pnp
