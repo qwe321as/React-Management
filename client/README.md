@@ -1,5 +1,5 @@
 # Getting Started with Create React App
-TEST12
+리엑트를 이용한 node.js 프로젝트
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
