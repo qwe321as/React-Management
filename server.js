@@ -21,12 +21,13 @@ const connection = mysql.createConnection({
 connection.connect();
 
 const multer = require('multer');
+const req = require('express/lib/request');
 const upload = multer({ dest: './upload' })
 
 app.get('/api/customers', (req, res) => {
 
     connection.query(
-        "SELECT * FROM customer",
+        "SELECT * FROM customer where isDeleted = 0 ",
         (err, rows, fieds) => {
             res.send(rows);
         }
@@ -34,20 +35,33 @@ app.get('/api/customers', (req, res) => {
 
 });
 
-app.use('/imge', express.static('./upload'));
+app.use('/image', express.static('./upload'));
 
-app.post('/api/customers', upload.single('imge'), (req, res) => {
-    let sql = 'insert info customer values (null, ?,?,?,?,?)';
-    let imge = '/imge/' + req.file.fileName;
+app.post('/api/customers', upload.single('image'), (req, res) => {
+    let sql = 'insert into customer values (null, ?,?,?,?,?,now(),0)';
+    let image = '/image/' + req.file.filename;
     let name = req.body.name;
     let birthday = req.body.birthday;
     let gender = req.body.gender;
     let job = req.body.job;
-    let params = [imge, name, birthday, gender, job];
+    let params = [image, name, birthday, gender, job];
     connection.query(sql, params,
         (err, rows, fields) => {
             res.send(rows);
+            console.log(err);
         });
 });
+app.delete('/api/customers/:id', (req, res) => {
+    let sql = 'update customer  set isDeleted = 1 where id = ?';
+    let params = [req.params.id];
+    connection.query(sql, params,
+        (err, rows, fields) => {
+            res.send(rows);
+            console.log(err);
+        });
+
+
+
+})
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
