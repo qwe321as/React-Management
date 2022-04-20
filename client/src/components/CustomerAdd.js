@@ -88,16 +88,15 @@ class CustomerAdd extends React.Component {
     }
 
     handleClose = () => {
-        this.setState(
-            this.state = {
-                file: null,
-                userName: '',
-                birthday: '',
-                gender: '',
-                job: '',
-                fileName: '',
-                open: false
-            });
+        this.setState({
+            file: null,
+            userName: '',
+            birthday: '',
+            gender: '',
+            job: '',
+            fileName: '',
+            open: false
+        });
     }
 
 
@@ -128,10 +127,7 @@ class CustomerAdd extends React.Component {
                     <DialogActions>
                         <Button variant='contained' color='primary' onClick={this.handleFormSubmit}>추가</Button>
                         <Button variant='outlined' color='primary' onClick={this.handleClose}>닫기</Button>
-
                     </DialogActions>
-
-
                 </Dialog>
 
             </div>
